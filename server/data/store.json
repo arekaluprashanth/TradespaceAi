@@ -1,0 +1,109 @@
+{
+  "users": [
+    {
+      "id": "demo",
+      "email": "demo@tradesphere.ai",
+      "name": "Demo Trader",
+      "password": "demo123",
+      "createdAt": "2026-06-05T13:57:57.727Z"
+    },
+    {
+      "id": "259dc369-ed1c-4035-81fc-152178b4a2b3",
+      "createdAt": "2026-06-05T14:02:36.242Z",
+      "name": "A.Prashanth",
+      "email": "prashu2242@gmail.com",
+      "password": "Prashaya@1425"
+    },
+    {
+      "id": "24873fd1-c2d1-43a7-83c5-89ad353b3d7a",
+      "createdAt": "2026-06-05T16:09:19.693Z",
+      "name": "A.Ajay Kumar",
+      "email": "jashwa708@gmail.com",
+      "password": "Ajay@2242"
+    },
+    {
+      "id": "c5fecf1d-3591-4174-af07-677ff4e58560",
+      "createdAt": "2026-06-06T11:16:19.089Z",
+      "name": "Tester",
+      "email": "tester+ci@example.com",
+      "password": "Password123!"
+    }
+  ],
+  "portfolios": [
+    {
+      "id": "portfolio-demo",
+      "userId": "demo",
+      "balance": 100000,
+      "holdings": [],
+      "createdAt": "2026-06-05T13:57:57.728Z"
+    },
+    {
+      "id": "portfolio-259dc369-ed1c-4035-81fc-152178b4a2b3",
+      "createdAt": "2026-06-05T14:02:36.242Z",
+      "userId": "259dc369-ed1c-4035-81fc-152178b4a2b3",
+      "balance": 100000,
+      "holdings": []
+    },
+    {
+      "id": "portfolio-24873fd1-c2d1-43a7-83c5-89ad353b3d7a",
+      "createdAt": "2026-06-05T16:09:19.693Z",
+      "userId": "24873fd1-c2d1-43a7-83c5-89ad353b3d7a",
+      "balance": 100000,
+      "holdings": []
+    },
+    {
+      "id": "portfolio-c5fecf1d-3591-4174-af07-677ff4e58560",
+      "createdAt": "2026-06-06T11:16:19.089Z",
+      "userId": "c5fecf1d-3591-4174-af07-677ff4e58560",
+      "balance": 100000,
+      "holdings": []
+    }
+  ],
+  "trades": [],
+  "watchlists": [
+    {
+      "id": "watchlist-demo",
+      "userId": "demo",
+      "symbols": [
+        "AAPL",
+        "BTC",
+        "SPY",
+        "TSLA",
+        "ETH"
+      ],
+      "createdAt": "2026-06-05T13:57:57.728Z"
+    },
+    {
+      "id": "watchlist-259dc369-ed1c-4035-81fc-152178b4a2b3",
+      "createdAt": "2026-06-05T14:02:36.242Z",
+      "userId": "259dc369-ed1c-4035-81fc-152178b4a2b3",
+      "symbols": [
+        "AAPL",
+        "BTC",
+        "SPY"
+      ]
+    },
+    {
+      "id": "watchlist-24873fd1-c2d1-43a7-83c5-89ad353b3d7a",
+      "createdAt": "2026-06-05T16:09:19.694Z",
+      "userId": "24873fd1-c2d1-43a7-83c5-89ad353b3d7a",
+      "symbols": [
+        "AAPL",
+        "BTC",
+        "SPY"
+      ]
+    },
+    {
+      "id": "watchlist-c5fecf1d-3591-4174-af07-677ff4e58560",
+      "createdAt": "2026-06-06T11:16:19.089Z",
+      "userId": "c5fecf1d-3591-4174-af07-677ff4e58560",
+      "symbols": [
+        "AAPL",
+        "BTC",
+        "SPY"
+      ]
+    }
+  ],
+  "strategies": [],
+  "indicators": []
+}

@@ -1,0 +1,385 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════
+   TradeSphere AI — Global Styles
+   Premium Fintech Dark Mode Aesthetic
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Base Layer ─────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply border-white/5;
+  }
+
+  html {
+    @apply antialiased;
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark-900 text-dark-100 font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Remove default autofill styles */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #d0d3de;
+    -webkit-box-shadow: 0 0 0px 1000px #1a2038 inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  ::selection {
+    @apply bg-accent-cyan/30 text-white;
+  }
+}
+
+/* ── Custom Scrollbar ───────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+/* ── Glassmorphism Utilities ────────────────────────── */
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass;
+  }
+
+  .glass-light {
+    @apply bg-white/[0.03] backdrop-blur-lg border border-white/[0.06];
+  }
+
+  .glass-strong {
+    @apply bg-white/10 backdrop-blur-2xl border border-white/15 shadow-glass;
+  }
+
+  .glass-card {
+    @apply bg-dark-800/50 backdrop-blur-xl border border-white/5 rounded-2xl;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+
+  .glass-card-hover:hover {
+    @apply border-white/10 shadow-glow-cyan bg-dark-800/60;
+    transform: translateY(-1px);
+  }
+
+  .glass-input {
+    @apply bg-dark-700/50 border border-white/10 rounded-xl text-dark-100
+           placeholder:text-dark-400 focus:outline-none focus:ring-2
+           focus:ring-accent-cyan/40 focus:border-accent-cyan/50
+           transition-all duration-200;
+  }
+
+  .glass-sidebar {
+    @apply bg-dark-900/80 backdrop-blur-2xl border-r border-white/5;
+  }
+}
+
+/* ── Gradient Backgrounds ───────────────────────────── */
+@layer components {
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+  }
+
+  .bg-gradient-primary-hover {
+    background: linear-gradient(135deg, #00bbdd 0%, #9333ea 100%);
+  }
+
+  .bg-gradient-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  }
+
+  .bg-gradient-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  }
+
+  .bg-gradient-dark {
+    background: linear-gradient(180deg, #0a0e1a 0%, #111627 50%, #0a0e1a 100%);
+  }
+
+  .bg-mesh {
+    background:
+      radial-gradient(at 20% 30%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(at 80% 70%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+  }
+
+  .bg-auth {
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(168, 85, 247, 0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+      linear-gradient(180deg, #060810 0%, #0a0e1a 100%);
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+/* ── Text Gradients ─────────────────────────────────── */
+@layer components {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+  }
+
+  .text-gradient-green {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  }
+
+  .text-gradient-red {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+  }
+}
+
+/* ── Glow Effects ───────────────────────────────────── */
+@layer components {
+  .glow-text-cyan {
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.15);
+  }
+
+  .glow-text-purple {
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.5), 0 0 40px rgba(168, 85, 247, 0.15);
+  }
+
+  .glow-text-green {
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5), 0 0 40px rgba(16, 185, 129, 0.15);
+  }
+
+  .glow-border-cyan {
+    box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.3), 0 0 15px rgba(0, 212, 255, 0.1);
+  }
+
+  .glow-border-purple {
+    box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.3), 0 0 15px rgba(168, 85, 247, 0.1);
+  }
+}
+
+/* ── Chart Container ────────────────────────────────── */
+@layer components {
+  .chart-container {
+    @apply relative w-full rounded-xl overflow-hidden;
+    min-height: 300px;
+    height: 100%;
+  }
+
+  .chart-container canvas {
+    @apply w-full h-full;
+  }
+
+  /* Responsive chart heights */
+  @screen sm {
+    .chart-container {
+      min-height: 350px;
+    }
+  }
+
+  @screen md {
+    .chart-container {
+      min-height: 400px;
+    }
+  }
+
+  @screen lg {
+    .chart-container {
+      min-height: 500px;
+    }
+  }
+
+  @screen xl {
+    .chart-container {
+      min-height: 560px;
+    }
+  }
+
+  .chart-tooltip {
+    @apply glass rounded-lg px-3 py-2 text-xs font-mono shadow-lg pointer-events-none;
+  }
+
+  .chart-crosshair {
+    @apply border-dashed border-white/20;
+  }
+}
+
+/* ── Skeleton Shimmer Animation ─────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@layer components {
+  .skeleton {
+    @apply rounded-lg;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.03) 25%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.03) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.8s ease-in-out infinite;
+  }
+}
+
+/* ── Animated Background Particles ──────────────────── */
+@keyframes particle-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(var(--drift-x, 100px), var(--drift-y, -200px)) scale(0.5);
+  }
+}
+
+@keyframes orb-float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(30px, -50px);
+  }
+  50% {
+    transform: translate(-20px, -100px);
+  }
+  75% {
+    transform: translate(50px, -50px);
+  }
+}
+
+.particle {
+  @apply absolute rounded-full pointer-events-none;
+  animation: particle-drift var(--duration, 12s) var(--delay, 0s) infinite ease-in-out;
+}
+
+.orb {
+  @apply absolute rounded-full pointer-events-none blur-3xl;
+  animation: orb-float var(--duration, 20s) var(--delay, 0s) infinite ease-in-out;
+}
+
+/* ── Scrollbar-hidden Utility ───────────────────────── */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ── Animated Borders ───────────────────────────────── */
+@keyframes border-rotate {
+  0% { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@layer components {
+  .animated-border {
+    position: relative;
+  }
+
+  .animated-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--angle),
+      transparent 60%,
+      #00d4ff 80%,
+      #a855f7 90%,
+      transparent 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: border-rotate 4s linear infinite;
+  }
+}
+
+/* ── Transitions ────────────────────────────────────── */
+@layer utilities {
+  .transition-default {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .transition-slow {
+    @apply transition-all duration-500 ease-out;
+  }
+}
+
+/* ── Focus Visible ──────────────────────────────────── */
+@layer base {
+  *:focus-visible {
+    @apply outline-none ring-2 ring-accent-cyan/40 ring-offset-2 ring-offset-dark-900;
+  }
+}

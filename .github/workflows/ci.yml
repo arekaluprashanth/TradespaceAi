@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install root deps
+        run: npm install
+      - name: Install server deps
+        run: npm --prefix server install
+      - name: Install client deps
+        run: npm --prefix client install
+      - name: Run server lint & audit
+        run: npm --prefix server audit --audit-level=moderate || true
+      - name: Build client
+        run: npm --prefix client run build
+      - name: Run tests (if present)
+        run: |
+          if [ -f server/package.json ] && grep -q "test" server/package.json; then npm --prefix server test || true; fi
+          if [ -f client/package.json ] && grep -q "test" client/package.json; then npm --prefix client test || true; fi

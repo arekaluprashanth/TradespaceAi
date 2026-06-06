@@ -1,0 +1,54 @@
+═══════════════════════════════════════════════════════════════════════
+  TradespaceAi - Quick Reference
+═══════════════════════════════════════════════════════════════════════
+
+📍 PROJECT LOCATION:
+   C:\Users\prash\Downloads\Trade\TradespaceAi\
+
+🚀 HOW TO START:
+   1. Navigate to: C:\Users\prash\Downloads\Trade\TradespaceAi\
+   2. Double-click: RUN_WINDOWS.bat
+   3. Wait ~10 seconds
+   4. Open browser: http://localhost:5173
+
+🌐 ACCESS THE APP:
+   • Same Computer:    http://localhost:5173
+   • Mobile/WiFi:      http://192.168.x.x:5173 (use your IP)
+   • Backend:          http://localhost:3001
+
+📂 KEY FILES:
+   RUN_WINDOWS.bat     ← Main launcher (click this!)
+   START_HERE.md       ← Complete guide
+   START.bat           ← Alternative launcher
+   server/             ← Backend (Express)
+   client/             ← Frontend (React)
+
+💾 YOUR DATA SAVED AT:
+   server/data/store.json
+
+📊 WHAT'S INCLUDED:
+   ✅ Real-time trading platform
+   ✅ Live market data
+   ✅ Portfolio tracking
+   ✅ Analytics dashboard
+   ✅ Strategy backtesting
+   ✅ Mobile responsive
+   ✅ Auto-saved data
+
+⚡ QUICK COMMANDS:
+   Start:              Double-click RUN_WINDOWS.bat
+   Stop:               Press Ctrl+C in terminal
+   Build:              npm run build
+   Install deps:       npm install
+
+❓ NOT WORKING?
+   • Ensure Node.js installed: https://nodejs.org/
+   • Check file exists: RUN_WINDOWS.bat
+   • Try running from Command Prompt:
+     cd C:\Users\prash\Downloads\Trade\TradespaceAi
+     npm run dev
+
+📚 MORE INFO:
+   Read: START_HERE.md (in same folder)
+
+═══════════════════════════════════════════════════════════════════════

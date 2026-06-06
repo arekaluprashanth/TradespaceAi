@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Production build
+client/dist/
+client/build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+*.log
+
+# Temp files
+tmp/
+temp/
+cache/
+
+# Server data backups
+server/data/store.json.bak
+
+# Export artifacts
+export/

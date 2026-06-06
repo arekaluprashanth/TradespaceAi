@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  server:
+    image: tradespaceai-server:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.server
+    container_name: tradespace-server
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - CLIENT_ORIGIN=*
+    expose:
+      - "3001"
+    networks:
+      - tradespace-net
+
+  client:
+    image: tradespaceai-client:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.client
+    container_name: tradespace-client
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+    networks:
+      - tradespace-net
+
+networks:
+  tradespace-net:
+    driver: bridge

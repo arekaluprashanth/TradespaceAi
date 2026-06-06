@@ -1,0 +1,251 @@
+import React, { useState, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Mail, Lock, User, UserPlus } from 'lucide-react';
+import { useAuthStore } from '../../stores/authStore';
+import { Button } from '../ui/Button';
+import { Input } from '../ui/Input';
+
+// ── Floating Particle ──────────────────────────────────
+
+interface ParticleConfig {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  duration: number;
+  delay: number;
+  color: string;
+}
+
+const ParticleField: React.FC = () => {
+  const particles: ParticleConfig[] = useMemo(() => {
+    const colors = [
+      'rgba(168, 85, 247, 0.3)',
+      'rgba(0, 212, 255, 0.25)',
+      'rgba(16, 185, 129, 0.2)',
+      'rgba(168, 85, 247, 0.15)',
+    ];
+    return Array.from({ length: 25 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      duration: Math.random() * 15 + 10,
+      delay: Math.random() * 5,
+      color: colors[i % colors.length],
+    }));
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            background: p.color,
+          }}
+          animate={{
+            y: [0, -60, -120, -60, 0],
+            x: [0, -30, 20, -40, 0],
+            opacity: [0, 1, 0.5, 1, 0],
+            scale: [0.5, 1, 0.7, 1, 0.5],
+          }}
+          transition={{
+            duration: p.duration,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+
+      {/* Floating orbs */}
+      <motion.div
+        className="absolute w-[350px] h-[350px] rounded-full blur-[120px] opacity-15"
+        style={{ background: 'radial-gradient(circle, #a855f7, transparent)', left: '15%', top: '30%' }}
+        animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute w-[300px] h-[300px] rounded-full blur-[120px] opacity-15"
+        style={{ background: 'radial-gradient(circle, #00d4ff, transparent)', right: '15%', bottom: '25%' }}
+        animate={{ x: [0, -40, 0], y: [0, 40, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+      />
+    </div>
+  );
+};
+
+// ── Signup Page ─────────────────────────────────────────
+
+const SignupPage: React.FC = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const { signup, isLoading, error, clearError } = useAuthStore();
+  const navigate = useNavigate();
+
+  const validate = (): boolean => {
+    const e: Record<string, string> = {};
+    if (!name.trim()) e.name = 'Name is required';
+    if (!email.trim()) e.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(email)) e.email = 'Invalid email address';
+    if (!password) e.password = 'Password is required';
+    else if (password.length < 6) e.password = 'Minimum 6 characters';
+    if (!confirmPassword) e.confirmPassword = 'Please confirm password';
+    else if (password !== confirmPassword) e.confirmPassword = 'Passwords do not match';
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    clearError();
+    if (!validate()) return;
+
+    try {
+      await signup(name, email, password);
+      navigate('/');
+    } catch {
+      // Error is already set in store
+    }
+  };
+
+  return (
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(/hero-bg.png)' }}
+      />
+      <div className="absolute inset-0 bg-dark-950/85" />
+      <div className="absolute inset-0 bg-auth" />
+      <div className="absolute inset-0 bg-grid opacity-40" />
+
+      {/* Particles */}
+      <ParticleField />
+
+      {/* Content */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="relative z-10 w-full max-w-md px-4"
+      >
+        {/* Card */}
+        <div className="bg-dark-800/60 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-glass">
+          {/* Logo */}
+          <div className="flex flex-col items-center mb-8">
+            <motion.img
+              src="/logo.png"
+              alt="TradeSphere"
+              className="w-14 h-14 mb-4"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
+            />
+            <h1 className="text-2xl font-bold text-gradient mb-1">
+              TradeSphere AI
+            </h1>
+            <p className="text-dark-400 text-sm">Create your trading account</p>
+          </div>
+
+          {/* Error message */}
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              className="mb-4 p-3 rounded-xl bg-accent-red/10 border border-accent-red/20 text-accent-red text-xs text-center"
+            >
+              {error}
+            </motion.div>
+          )}
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <Input
+              label="Full Name"
+              type="text"
+              placeholder="John Doe"
+              icon={<User className="w-4 h-4" />}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              error={errors.name}
+              autoComplete="name"
+            />
+
+            <Input
+              label="Email"
+              type="email"
+              placeholder="you@example.com"
+              icon={<Mail className="w-4 h-4" />}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              error={errors.email}
+              autoComplete="email"
+            />
+
+            <Input
+              label="Password"
+              type="password"
+              placeholder="••••••••"
+              icon={<Lock className="w-4 h-4" />}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={errors.password}
+              autoComplete="new-password"
+            />
+
+            <Input
+              label="Confirm Password"
+              type="password"
+              placeholder="••••••••"
+              icon={<Lock className="w-4 h-4" />}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              error={errors.confirmPassword}
+              autoComplete="new-password"
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              size="lg"
+              loading={isLoading}
+              icon={<UserPlus className="w-4 h-4" />}
+            >
+              Create Account
+            </Button>
+          </form>
+
+          {/* Sign in link */}
+          <p className="mt-6 text-center text-xs text-dark-400">
+            Already have an account?{' '}
+            <Link
+              to="/login"
+              className="text-accent-cyan hover:text-accent-cyan/80 font-medium transition-colors"
+            >
+              Sign In
+            </Link>
+          </p>
+        </div>
+
+        {/* Footer */}
+        <p className="mt-6 text-center text-[11px] text-dark-500">
+          © 2026 TradeSphere AI · Paper Trading Simulator
+        </p>
+      </motion.div>
+    </div>
+  );
+};
+
+export default SignupPage;

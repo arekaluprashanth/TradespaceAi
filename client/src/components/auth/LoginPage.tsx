@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, LogIn, Sparkles } from 'lucide-react';
+import { Mail, Lock, LogIn } from 'lucide-react';
 import { useAuthStore } from '../../stores/authStore';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
@@ -115,12 +115,7 @@ const LoginPage: React.FC = () => {
     }
   };
 
-  const fillDemo = () => {
-    setEmail('demo@tradesphere.ai');
-    setPassword('demo123');
-    setErrors({});
-    clearError();
-  };
+
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -216,19 +211,7 @@ const LoginPage: React.FC = () => {
             </Button>
           </form>
 
-          {/* Demo credentials */}
-          <motion.button
-            onClick={fillDemo}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl
-                       bg-accent-purple/10 border border-accent-purple/20
-                       text-accent-purple text-xs font-medium
-                       hover:bg-accent-purple/15 transition-all"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            Try Demo — demo@tradesphere.ai / demo123
-          </motion.button>
+
 
           {/* Sign up link */}
           <p className="mt-6 text-center text-xs text-dark-400">

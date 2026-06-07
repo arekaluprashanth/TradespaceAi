@@ -16,9 +16,9 @@
 //    Copy the Public Key below
 
 export const EMAILJS_CONFIG = {
-  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID',
-  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID',
-  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY',
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_rd0vuu9',
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_nltl7sa',
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'LldPJSF81o01WcVi7',
 };
 
 export function isEmailJSConfigured(): boolean {

@@ -1,0 +1,18 @@
+{
+  "liveServer.settings.root": "client/dist",
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.CustomBrowser": "chrome",
+  "liveServer.settings.wait": 0,
+  "liveServer.settings.proxy": {
+    "/api": {
+      "target": "http://localhost:3001",
+      "secure": false,
+      "changeOrigin": true
+    }
+  },
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.git": true,
+    "android": true
+  }
+}

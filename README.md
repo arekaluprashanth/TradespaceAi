@@ -1,34 +1,36 @@
-# TradeSpace AI 2.0 🚀
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-TradeSpace AI has been completely transformed into a modern, production-grade fintech platform inspired by unicorns like Groww, Upstox, and Zerodha.
+## Getting Started
 
-## New Tech Stack
-* **Frontend**: Next.js 15, React 19, Tailwind CSS, Framer Motion, Recharts
-* **Backend**: Node.js, Express, Socket.io (Realtime)
-* **Database**: PostgreSQL / SQLite (Local), Prisma ORM
-* **Authentication**: JWT & bcrypt
+First, run the development server:
 
-## Features
-1. **Premium Landing Page**: Glassmorphism UI, glowing gradients, Apple-level micro-animations.
-2. **Trading Dashboard**: Advanced UI with Portfolio Overview, interactive charts, and live watchlist.
-3. **Paper Trading Engine**: A backend engine to simulate buy/sell transactions and track virtual wallet balances.
-4. **Realtime Updates**: Socket.io integration streams live simulated price updates to the frontend.
-5. **AI Features**: Mock AI endpoints for stock sentiment, portfolio risk analysis, and an AI Chatbot Assistant.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Getting Started Locally
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### 1. Backend Setup
-1. `cd backend`
-2. `npm install`
-3. `npx prisma db push` (This creates the local SQLite database)
-4. `npm run dev` (Runs the Node.js server on port 3001)
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### 2. Frontend Setup
-1. `cd frontend`
-2. `npm install`
-3. `npm run dev` (Runs Next.js on port 3000)
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Folder Structure
-* `/frontend`: Next.js 15 App router code (Pages, Components, Styles)
-* `/backend`: Node.js Express server, APIs, Prisma Schema, Socket.io
-* `/old-client`: The previous static React application (kept for backup)
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -9,28 +9,18 @@ export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json();
     
-    try {
-      const user = await prisma.user.findUnique({ where: { email } });
-      if (!user) {
-        // Fallback mock login for the Vercel demo since there are no users in DB
-        const fakeId = `demo-${Date.now()}`;
-        const token = jwt.sign({ userId: fakeId }, JWT_SECRET, { expiresIn: '7d' });
-        return NextResponse.json({ token, user: { id: fakeId, name: 'Demo User', email, walletBalance: 100000.0 } });
-      }
-
-      const validPassword = await bcrypt.compare(password, user.password);
-      if (!validPassword) {
-        return NextResponse.json({ error: 'Invalid credentials' }, { status: 400 });
-      }
-
-      const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '7d' });
-      return NextResponse.json({ token, user: { id: user.id, name: user.name, email: user.email, walletBalance: user.walletBalance } });
-    } catch (dbError) {
-      // Mock for demo
-      const fakeId = `demo-${Date.now()}`;
-      const token = jwt.sign({ userId: fakeId }, JWT_SECRET, { expiresIn: '7d' });
-      return NextResponse.json({ token, user: { id: fakeId, name: 'Demo User', email, walletBalance: 100000.0 } });
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 400 });
     }
+
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 400 });
+    }
+
+    const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '7d' });
+    return NextResponse.json({ token, user: { id: user.id, name: user.name, email: user.email, walletBalance: user.walletBalance } });
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });

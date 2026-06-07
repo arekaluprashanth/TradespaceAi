@@ -1,0 +1,9 @@
+1:"$Sreact.fragment"
+2:I[47257,["/TradespaceAi/_next/static/chunks/05-c3ty_6dwfk.js","/TradespaceAi/_next/static/chunks/3u8v3tzu3aoox.js"],"ClientPageRoot"]
+3:I[30257,["/TradespaceAi/_next/static/chunks/05-c3ty_6dwfk.js","/TradespaceAi/_next/static/chunks/3u8v3tzu3aoox.js","/TradespaceAi/_next/static/chunks/1rxncug86bump.js","/TradespaceAi/_next/static/chunks/1fyo2n8wylqiz.js","/TradespaceAi/_next/static/chunks/1wv0wxhe_i6do.js"],"default"]
+6:I[97367,["/TradespaceAi/_next/static/chunks/05-c3ty_6dwfk.js","/TradespaceAi/_next/static/chunks/3u8v3tzu3aoox.js"],"OutletBoundary"]
+7:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/TradespaceAi/_next/static/chunks/1fyo2n8wylqiz.js","async":true}],["$","script","script-1",{"src":"/TradespaceAi/_next/static/chunks/1wv0wxhe_i6do.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"5rLmIqIGrYfasOoyV50m7"}
+4:{}
+5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
+8:null

@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id             String           @id @default(uuid())
+  name           String
+  email          String           @unique
+  password       String
+  walletBalance  Float            @default(100000.0) // Virtual starting balance
+  role           String           @default("USER")
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  portfolios     Portfolio[]
+  trades         Trade[]
+  watchlists     Watchlist[]
+  transactions   Transaction[]
+  notifications  Notification[]
+  aiPredictions  AIPrediction[]
+}
+
+model Portfolio {
+  id           String   @id @default(uuid())
+  userId       String
+  symbol       String
+  quantity     Float
+  averagePrice Float
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, symbol])
+}
+
+model Trade {
+  id           String   @id @default(uuid())
+  userId       String
+  symbol       String
+  type         String   // "BUY" or "SELL"
+  quantity     Float
+  price        Float
+  status       String   @default("COMPLETED") // PENDING, COMPLETED, FAILED
+  timestamp    DateTime @default(now())
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Watchlist {
+  id        String   @id @default(uuid())
+  userId    String
+  symbol    String
+  addedAt   DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, symbol])
+}
+
+model Transaction {
+  id          String   @id @default(uuid())
+  userId      String
+  type        String   // "DEPOSIT", "WITHDRAWAL", "TRADE"
+  amount      Float
+  description String?
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AIPrediction {
+  id        String   @id @default(uuid())
+  userId    String
+  symbol    String
+  prediction String  // "BULLISH", "BEARISH", "NEUTRAL"
+  confidence Float
+  insight    String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

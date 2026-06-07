@@ -6,7 +6,7 @@ import {
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, Wallet, TrendingUp, Briefcase } from 'lucide-react';
 
-const mockChartData = [
+const initialChartData = [
   { time: '09:30', price: 150.20 },
   { time: '10:00', price: 151.50 },
   { time: '10:30', price: 149.80 },
@@ -23,7 +23,7 @@ const mockChartData = [
   { time: '16:00', price: 160.50 },
 ];
 
-const mockWatchlist = [
+const initialWatchlist = [
   { symbol: 'AAPL', name: 'Apple Inc.', price: '173.50', change: '+1.2%', up: true },
   { symbol: 'TSLA', name: 'Tesla Inc.', price: '210.45', change: '-2.4%', up: false },
   { symbol: 'NVDA', name: 'NVIDIA Corp.', price: '850.20', change: '+3.5%', up: true },
@@ -34,7 +34,42 @@ const mockWatchlist = [
 
 export default function DashboardPage() {
   const [activeRange, setActiveRange] = useState('1D');
-  
+  const [chartData, setChartData] = useState(initialChartData);
+  const [watchlist, setWatchlist] = useState(initialWatchlist);
+
+  // Client-side realtime simulation (replaces Socket.io for Vercel)
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setWatchlist(prev => prev.map(stock => {
+        const numPrice = parseFloat(stock.price);
+        const fluctuation = (Math.random() * 2 - 1) * (numPrice * 0.001); // 0.1% volatility
+        const newPrice = (numPrice + fluctuation).toFixed(2);
+        return {
+          ...stock,
+          price: newPrice,
+          up: fluctuation >= 0,
+          change: (fluctuation >= 0 ? '+' : '') + (fluctuation / numPrice * 100).toFixed(2) + '%'
+        };
+      }));
+
+      setChartData(prev => {
+        const last = prev[prev.length - 1];
+        const newPrice = last.price + (Math.random() * 2 - 1);
+        const [h, m] = last.time.split(':').map(Number);
+        let nextM = m + 30;
+        let nextH = h;
+        if (nextM >= 60) {
+          nextM -= 60;
+          nextH += 1;
+        }
+        const newTime = `${nextH.toString().padStart(2, '0')}:${nextM.toString().padStart(2, '0')}`;
+        return [...prev.slice(1), { time: newTime, price: newPrice }];
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="flex flex-col lg:flex-row gap-6 h-full">
       {/* Main Column */}
@@ -101,7 +136,7 @@ export default function DashboardPage() {
 
           <div className="flex-1 w-full relative z-10 min-h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={mockChartData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+              <AreaChart data={chartData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
@@ -160,7 +195,7 @@ export default function DashboardPage() {
           </div>
           
           <div className="space-y-4">
-            {mockWatchlist.map((stock) => (
+            {watchlist.map((stock) => (
               <div key={stock.symbol} className="flex justify-between items-center p-3 hover:bg-white/5 rounded-xl transition-colors cursor-pointer border border-transparent hover:border-white/5">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 border border-white/10 flex items-center justify-center text-sm font-bold text-white shadow-inner">

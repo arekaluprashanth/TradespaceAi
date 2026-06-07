@@ -11,3 +11,5 @@ services:
         value: 10000
       - key: DATABASE_URL
         value: file:./dev.db
+      - key: NODE_VERSION
+        value: 20

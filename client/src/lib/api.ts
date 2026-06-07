@@ -43,8 +43,8 @@ api.interceptors.response.use(
       if (status === 401) {
         localStorage.removeItem('tradesphere_token');
         localStorage.removeItem('tradesphere_user');
-        if (window.location.pathname !== '/login') {
-          window.location.href = '/login';
+        if (!window.location.hash.includes('/login')) {
+          window.location.hash = '#/login';
         }
       }
 

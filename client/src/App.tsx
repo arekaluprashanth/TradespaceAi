@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import LoginPage from './components/auth/LoginPage';
@@ -32,7 +32,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
@@ -45,7 +45,7 @@ function App() {
             <Route path="watchlist" element={<WatchlistPage />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
       <Toaster
         position="top-right"
         toastOptions={{

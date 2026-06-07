@@ -54,7 +54,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
       {/* Logo */}
       <div className="flex items-center gap-3 px-5 py-6 border-b border-white/5">
         <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-accent-cyan to-accent-purple flex items-center justify-center shadow-glow-cyan">
-          <img src="/logo.png" alt="TradeSphere" className="w-6 h-6" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="TradeSphere" className="w-6 h-6" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
         </div>
         {!collapsed && (
           <motion.span

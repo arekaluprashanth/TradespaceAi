@@ -125,7 +125,7 @@ const SignupPage: React.FC = () => {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/hero-bg.png)' }}
+        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}hero-bg.png)` }}
       />
       <div className="absolute inset-0 bg-dark-950/85" />
       <div className="absolute inset-0 bg-auth" />
@@ -146,7 +146,7 @@ const SignupPage: React.FC = () => {
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
             <motion.img
-              src="/logo.png"
+              src={`${import.meta.env.BASE_URL}logo.png`}
               alt="TradeSphere"
               className="w-14 h-14 mb-4"
               initial={{ scale: 0 }}

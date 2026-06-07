@@ -33,7 +33,6 @@ jobs:
         run: npm run build
         env:
           VITE_API_URL: ""
-          GITHUB_PAGES: "true"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

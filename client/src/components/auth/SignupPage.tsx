@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Lock, User, UserPlus, ShieldCheck, ArrowLeft, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
+import emailjs from '@emailjs/browser';
 import { useAuthStore } from '../../stores/authStore';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
+import { EMAILJS_CONFIG, isEmailJSConfigured } from '../../lib/emailjs';
 
 // ── Floating Particle ──────────────────────────────────
 
@@ -191,19 +193,50 @@ const SignupPage: React.FC = () => {
     return Object.keys(e).length === 0;
   };
 
-  const generateAndSendCode = () => {
+  const generateAndSendCode = async () => {
     const newCode = String(Math.floor(100000 + Math.random() * 900000));
     setGeneratedCode(newCode);
     setCode('');
     setCountdown(60);
 
-    toast.success(
-      `Verification code sent to ${email}`,
-      { duration: 4000, icon: '📧' }
-    );
-    toast(
-      `Your code: ${newCode}`,
-      {
+    if (isEmailJSConfigured()) {
+      try {
+        await emailjs.send(
+          EMAILJS_CONFIG.serviceId,
+          EMAILJS_CONFIG.templateId,
+          {
+            to_email: email,
+            to_name: name,
+            verification_code: newCode,
+          },
+          EMAILJS_CONFIG.publicKey
+        );
+        toast.success(
+          `Verification code sent to ${email}`,
+          { duration: 4000, icon: '📧' }
+        );
+      } catch {
+        toast.error('Failed to send email. Showing code instead.', { duration: 3000 });
+        toast(`Your code: ${newCode}`, {
+          duration: 30000,
+          icon: '🔑',
+          style: {
+            background: '#1a1f36',
+            color: '#a855f7',
+            border: '1px solid rgba(168, 85, 247, 0.3)',
+            fontWeight: 600,
+            fontSize: '14px',
+            letterSpacing: '2px',
+          },
+        });
+      }
+    } else {
+      // EmailJS not configured — show code via toast
+      toast.success(
+        `Verification code sent to ${email}`,
+        { duration: 4000, icon: '📧' }
+      );
+      toast(`Your code: ${newCode}`, {
         duration: 30000,
         icon: '🔑',
         style: {
@@ -214,15 +247,14 @@ const SignupPage: React.FC = () => {
           fontSize: '14px',
           letterSpacing: '2px',
         },
-      }
-    );
+      });
+    }
   };
 
   const handleSendCode = async () => {
     if (!validateDetails()) return;
     setSendingCode(true);
-    await new Promise((r) => setTimeout(r, 800));
-    generateAndSendCode();
+    await generateAndSendCode();
     setStep('verify');
     setSendingCode(false);
   };
@@ -249,9 +281,9 @@ const SignupPage: React.FC = () => {
     }
   };
 
-  const handleResend = () => {
+  const handleResend = async () => {
     if (countdown > 0) return;
-    generateAndSendCode();
+    await generateAndSendCode();
   };
 
   const handleBack = () => {

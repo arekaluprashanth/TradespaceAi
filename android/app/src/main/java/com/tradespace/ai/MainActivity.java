@@ -9,6 +9,7 @@ public class MainActivity extends BridgeActivity {
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             android.view.Window window = getWindow();
+            window.setFlags(android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED, android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
             android.view.Display.Mode[] modes = window.getWindowManager().getDefaultDisplay().getSupportedModes();
             android.view.Display.Mode bestMode = null;
             float maxRefreshRate = 0;

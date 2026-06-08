@@ -1,35 +1,27 @@
 {
-  "name": "backend",
+  "name": "tradesphere-ai-server",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "npx tsc",
-    "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts"
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "test": "jest --runInBand"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "@prisma/client": "^7.8.0",
-    "bcrypt": "^6.0.0",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.3",
-    "prisma": "^7.8.0",
-    "socket.io": "^4.8.3",
-    "@types/bcrypt": "^6.0.0",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^25.9.2",
-    "typescript": "^6.0.3",
-    "ts-node": "^10.9.2"
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "uuid": "^9.0.1",
+    "helmet": "^7.0.0",
+    "compression": "^1.7.4",
+    "express-rate-limit": "^6.8.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "jest": "^29.6.1",
+    "supertest": "^7.0.0"
   }
 }

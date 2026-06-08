@@ -56,7 +56,7 @@ export default function AssetModal({ isOpen, onClose, asset }: AssetModalProps) 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-x-0 bottom-0 z-50 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-md bg-dark-900 border border-dark-600 rounded-t-3xl md:rounded-3xl shadow-xl overflow-hidden flex flex-col max-h-[90vh]"
+            className="fixed inset-x-0 bottom-0 z-50 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-md glass-strong rounded-t-3xl md:rounded-3xl shadow-glow-cyan overflow-hidden flex flex-col max-h-[90vh]"
           >
             {/* Header */}
             <div className="p-6 pb-4 border-b border-dark-600 flex justify-between items-start">

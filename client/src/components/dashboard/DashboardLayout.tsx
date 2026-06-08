@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { useAuthStore } from '../../stores/authStore';
 import Sidebar from './Sidebar';
 import TopNav from './TopNav';
-import BottomNav from './BottomNav';
 
 export default function DashboardLayout() {
   const { isAuthenticated } = useAuthStore();
@@ -23,7 +22,7 @@ export default function DashboardLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 pb-16 lg:pb-0">
+    <div className="min-h-screen bg-dark-950">
       <Sidebar
         collapsed={sidebarCollapsed}
         onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
@@ -38,7 +37,7 @@ export default function DashboardLayout() {
       >
         <TopNav onMenuClick={() => setMobileMenuOpen(true)} />
 
-        <main className="p-4 lg:p-6 max-w-7xl mx-auto">
+        <main className="p-4 lg:p-6">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -48,9 +47,6 @@ export default function DashboardLayout() {
           </motion.div>
         </main>
       </div>
-
-      {/* Bottom Navigation for Mobile */}
-      <BottomNav />
     </div>
   );
 }

@@ -59,12 +59,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     } catch {
       // Backend unreachable — simulate Local Database for static site
       const dbStr = localStorage.getItem('tradespace_users_db');
-      let usersDb = dbStr ? JSON.parse(dbStr) : [];
-      
-      // Default demo user for easy testing
-      if (usersDb.length === 0) {
-        usersDb.push({ id: 'demo-1', name: 'Demo User', email: 'demo@example.com', password: 'password' });
-      }
+      const usersDb = dbStr ? JSON.parse(dbStr) : [];
       
       const existingUser = usersDb.find((u: any) => u.email === email && u.password === password);
       
@@ -115,7 +110,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     } catch {
       // Backend unreachable — simulate Local Database for static site
       const dbStr = localStorage.getItem('tradespace_users_db');
-      let usersDb = dbStr ? JSON.parse(dbStr) : [];
+      const usersDb = dbStr ? JSON.parse(dbStr) : [];
       
       // Default demo user for easy testing
       if (usersDb.length === 0) {
@@ -163,7 +158,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
       throw new Error('Fallback to local DB');
     } catch {
       const dbStr = localStorage.getItem('tradespace_users_db');
-      let usersDb = dbStr ? JSON.parse(dbStr) : [];
+      const usersDb = dbStr ? JSON.parse(dbStr) : [];
       
       const userIndex = usersDb.findIndex((u: any) => u.email === email);
       if (userIndex !== -1) {

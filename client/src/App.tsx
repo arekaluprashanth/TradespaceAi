@@ -14,6 +14,8 @@ import AnalyticsPage from './pages/AnalyticsPage';
 import WatchlistPage from './pages/WatchlistPage';
 import SettingsPage from './pages/SettingsPage';
 import GlobalRipple from './components/ui/GlobalRipple';
+import GlobalTooltip from './components/ui/GlobalTooltip';
+import ChatBot from './components/ui/ChatBot';
 import { useAuthStore } from './stores/authStore';
 import { useUiStore } from './stores/uiStore';
 
@@ -62,6 +64,8 @@ function App() {
         </Routes>
       </HashRouter>
       <GlobalRipple />
+      <GlobalTooltip />
+      <ChatBot />
       <Toaster
         position="top-right"
         toastOptions={{

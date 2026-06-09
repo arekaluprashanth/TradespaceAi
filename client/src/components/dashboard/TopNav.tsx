@@ -87,6 +87,8 @@ export default function TopNav({ onMenuClick }: TopNavProps) {
             onFocus={() => setShowSearchResults(true)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && filteredAssets.length > 0) {
+                e.preventDefault();
+                (e.target as HTMLInputElement).blur();
                 setSelectedAsset(filteredAssets[0]);
                 setShowSearchResults(false);
               }

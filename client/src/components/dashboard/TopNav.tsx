@@ -38,7 +38,7 @@ export default function TopNav({ onMenuClick }: TopNavProps) {
     : 'TS';
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-dark-800/80 backdrop-blur-xl border-b border-white/5 flex items-center px-4 lg:px-6 gap-4">
+    <header className="sticky top-0 z-30 h-16 bg-dark-900 border-b border-white/5 flex items-center px-4 lg:px-6 gap-4">
       {/* Mobile menu button */}
       <button
         onClick={onMenuClick}

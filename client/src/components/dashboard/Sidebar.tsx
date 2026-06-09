@@ -158,7 +158,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
     <>
       {/* Desktop sidebar */}
       <aside
-        className={`hidden lg:flex flex-col fixed left-0 top-0 h-screen bg-dark-900/95 backdrop-blur-xl border-r border-white/5 z-40 transition-all duration-300 ${
+        className={`hidden lg:flex flex-col fixed left-0 top-0 h-screen bg-dark-900 border-r border-white/5 z-40 transition-all duration-300 ${
           collapsed ? 'w-20' : 'w-[280px]'
         }`}
       >
@@ -181,7 +181,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
               animate={{ x: 0 }}
               exit={{ x: -300 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed left-0 top-0 h-screen w-[280px] bg-dark-900/98 backdrop-blur-xl border-r border-white/5 z-50 lg:hidden"
+              className="fixed left-0 top-0 h-screen w-[280px] bg-dark-900 border-r border-white/5 z-50 lg:hidden"
             >
               {sidebarContent}
             </motion.aside>

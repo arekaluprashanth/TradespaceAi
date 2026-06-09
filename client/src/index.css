@@ -62,6 +62,11 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Eliminate the 300ms mobile tap delay for instant clicks */
+  a, button, input, select, textarea {
+    touch-action: manipulation;
+  }
+
   /* Remove default autofill styles */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,

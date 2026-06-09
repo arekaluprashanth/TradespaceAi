@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowUpRight, ArrowDownRight, TrendingUp } from 'lucide-react';
 import { formatCurrency } from '../../lib/utils';
@@ -40,7 +41,7 @@ export default function AssetModal({ isOpen, onClose, asset }: AssetModalProps) 
     }
   };
 
-  return (
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
         <>
@@ -160,4 +161,6 @@ export default function AssetModal({ isOpen, onClose, asset }: AssetModalProps) 
       )}
     </AnimatePresence>
   );
+
+  return typeof document !== 'undefined' ? createPortal(modalContent, document.body) : null;
 }

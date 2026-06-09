@@ -20,9 +20,12 @@ export default function ChatBot() {
     },
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
@@ -188,7 +191,7 @@ export default function ChatBot() {
               </div>
 
               {/* Chat Area */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide">
+              <div ref={containerRef} className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide scroll-smooth">
                 {messages.map((msg) => (
                   <div
                     key={msg.id}

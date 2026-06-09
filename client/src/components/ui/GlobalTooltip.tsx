@@ -25,10 +25,10 @@ export default function GlobalTooltip() {
         if (info && info.length > 0) {
           currentTarget = interactiveEl;
           
-          // Add scale highlight styling
-          interactiveEl.style.transform = 'scale(1.08)';
-          interactiveEl.style.boxShadow = '0 0 15px 2px rgba(0,240,255,0.5)';
-          interactiveEl.style.transition = 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
+          // Subtle highlight matching the dashboard sidebars
+          interactiveEl.style.boxShadow = 'inset 0 0 0 1px rgba(0,240,255,0.3), 0 4px 20px rgba(0,240,255,0.1)';
+          interactiveEl.style.transform = 'translateY(-1px)';
+          interactiveEl.style.transition = 'all 0.2s ease-out';
           interactiveEl.style.zIndex = '50';
           
           // Show tooltip

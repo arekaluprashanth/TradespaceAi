@@ -19,18 +19,7 @@ export default function AssetModal({ isOpen, onClose, asset }: AssetModalProps) 
   const [orderType, setOrderType] = useState<'buy' | 'sell'>('buy');
   const [quantity, setQuantity] = useState('1');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { executeTrade } = usePortfolio();
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
+  const { executeTrade } = usePortfolioStore();
 
   if (!isOpen || !asset) return null;
 
@@ -62,14 +51,15 @@ export default function AssetModal({ isOpen, onClose, asset }: AssetModalProps) 
             onClick={onClose}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
           />
-          <motion.div
-            initial={{ opacity: 0, y: '20px', scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: '20px', scale: 0.95 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[95%] sm:w-full max-w-md bg-dark-900/95 backdrop-blur-2xl rounded-3xl shadow-glow-cyan border border-white/10 overflow-hidden flex flex-col max-h-[90vh]"
-          >
-            {/* Header */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+            <motion.div
+              initial={{ opacity: 0, y: '20px', scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: '20px', scale: 0.95 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="pointer-events-auto w-full max-w-md bg-dark-900/95 backdrop-blur-2xl rounded-3xl shadow-glow-cyan border border-white/10 overflow-hidden flex flex-col max-h-[90vh]"
+            >
+              {/* Header */}
             <div className="p-6 pb-4 border-b border-dark-600 flex justify-between items-start">
               <div>
                 <h2 className="text-2xl font-bold text-white">{asset.symbol}</h2>
@@ -167,6 +157,7 @@ export default function AssetModal({ isOpen, onClose, asset }: AssetModalProps) 
               </button>
             </div>
           </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>

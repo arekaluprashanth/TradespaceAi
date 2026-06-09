@@ -44,17 +44,30 @@ export default function ChatBot() {
     if (lowerQ.includes('stock') || lowerQ.includes('market')) {
       return "The broader equity markets are currently experiencing a slight rotation out of mega-cap tech into small caps. Keep an eye on the Russell 2000 (IWM) for breakout opportunities.";
     }
-    if (lowerQ.includes('how to trade') || lowerQ.includes('strategy')) {
-      return "For beginners, I recommend starting with 'Paper Trading' to practice without risk. Focus on learning Support and Resistance, RSI, and moving averages. Always use a stop-loss to protect your capital!";
-    }
-    if (lowerQ.includes('hello') || lowerQ.includes('hi')) {
-      return "Greetings! TradeSpace Apexx Ai at your service. Do you need an analysis on a specific asset today?";
+    // First check custom intelligent persona responses
+    if (lowerQ.includes('hello') || lowerQ.includes('hi') || lowerQ.includes('hey')) {
+      return "Hello there! I'm TradeSpace Apexx AI, your personal financial quant. I'm here to analyze market data, explain complex trading concepts, or help you execute paper trades. What's on your mind today?";
     }
     if (lowerQ.includes('who are you') || lowerQ.includes('what are you')) {
-      return "I am TradeSpace Apexx Ai, a state-of-the-art language model designed specifically for financial analysis, market prediction, and helping you navigate the TradeSpace platform.";
+      return "I am TradeSpace Apexx AI, an advanced language model trained specifically for financial markets, quantitative analysis, and high-frequency trading simulation. How can I assist you?";
     }
-    if (lowerQ.includes('fast') || lowerQ.includes('furious')) {
-      return "TradeSpace is built on an ultra-optimized 165Hz architecture. It's designed to be fast, furious, and completely lag-free to give you the ultimate trading edge!";
+    if (lowerQ.includes('how to trade') || lowerQ.includes('how do i trade') || lowerQ.includes('start trading')) {
+      return "To start trading on TradeSpace, simply navigate to your Dashboard, click on any asset in your Watchlist (or search for one), and click 'Buy' or 'Sell'. The order will be executed against real-time simulated liquidity!";
+    }
+    if (lowerQ.includes('what is the best') && (lowerQ.includes('coin') || lowerQ.includes('stock') || lowerQ.includes('crypto'))) {
+      return "As an AI, I cannot provide guaranteed financial advice. However, currently Bitcoin (BTC) and Ethereum (ETH) show the highest institutional adoption, while large-cap tech stocks like AAPL and TSLA provide strong liquidity for active trading strategies.";
+    }
+    if (lowerQ.includes('explain') && lowerQ.includes('leverage')) {
+      return "Leverage in trading is like borrowing money to increase your position size. For example, with 10x leverage, a $100 investment lets you trade $1,000 worth of assets. It amplifies both your profits AND your losses, so risk management is critical.";
+    }
+    if (lowerQ.includes('is it a good time') || lowerQ.includes('should i buy')) {
+      return "Market timing is famously difficult! Instead of trying to find the 'perfect' time, many professionals use Dollar Cost Averaging (DCA) or wait for confirmation of a trend breakout on the charts before entering. Always analyze the risk-to-reward ratio first.";
+    }
+    if (lowerQ.includes('good') || lowerQ.includes('fantastic') || lowerQ.includes('awesome')) {
+      return "I'm glad you're enjoying the experience! My goal is to be the fastest, most advanced paper trading assistant in the world. Let me know if you want to dive into some chart analysis or backtesting.";
+    }
+    if (lowerQ.includes('fast') || lowerQ.includes('165hz') || lowerQ.includes('speed')) {
+      return "Absolutely! TradeSpace is built on an ultra-optimized architecture designed to run at up to 165Hz. It's built to be fast, furious, and completely lag-free to give you the ultimate trading edge!";
     }
 
     // Attempt to fetch definition from Wikipedia API for highly intelligent answers
@@ -88,13 +101,14 @@ export default function ChatBot() {
     }
 
     // Default sophisticated fallback
-    const defaults = [
-      "That's an interesting perspective. Considering current macroeconomic factors like interest rates and inflation data, we should approach this cautiously. What timeframe are you looking at?",
-      "My models suggest a period of consolidation before the next major move. I recommend setting price alerts and waiting for a clear breakout confirmation.",
-      "As an AI, I analyze millions of data points per second. Based on current sentiment and order book depth, I'd say the risk-to-reward ratio here is roughly 1:2. Proceed with proper risk management.",
-      "I don't have real-time data for that specific obscure query right this second, but fundamentally, always ensure you're not over-leveraged when exploring new assets.",
+    const fallbacks = [
+      "I'm continuously analyzing real-time market data. Could you rephrase your question so I can provide a more accurate technical breakdown?",
+      "That's an interesting perspective. Based on my quantitative models, the market tends to be highly volatile around those parameters. What specific asset are you looking at?",
+      "I can certainly help with that. Are you approaching this from a day-trading perspective, or are you looking for a long-term investment analysis?",
+      "To give you the best answer, I need to know your risk tolerance. Do you prefer high-risk crypto assets or more stable blue-chip equities?",
+      "Interesting question. While my neural networks process that, you might want to check the Analytics tab on your Dashboard to see the latest momentum indicators."
     ];
-    return defaults[Math.floor(Math.random() * defaults.length)];
+    return fallbacks[Math.floor(Math.random() * fallbacks.length)];
   };
 
   const handleSend = async () => {

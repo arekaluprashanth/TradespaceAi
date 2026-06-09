@@ -254,25 +254,24 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
 
       {/* Bottom Row: Navigation Tabs */}
       <div className="px-4 lg:px-8 max-w-7xl mx-auto w-full">
-        <nav className="flex gap-6 overflow-x-auto no-scrollbar">
+        <nav className="flex gap-6 overflow-x-auto no-scrollbar py-2">
           {NAV_LINKS.map((link) => {
             const isActive = location.pathname === link.path;
             return (
-              <Link
+              <motion.div
                 key={link.path}
-                to={link.path}
-                className={`relative py-3 px-1 text-sm font-medium transition-colors whitespace-nowrap ${
-                  isActive ? 'text-accent-cyan' : 'text-dark-300 hover:text-white'
-                }`}
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {link.label}
-                {isActive && (
-                  <motion.div
-                    layoutId="topNavTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent-cyan rounded-t-full"
-                  />
-                )}
-              </Link>
+                <Link
+                  to={link.path}
+                  className={`relative py-2 px-2 text-sm font-medium transition-colors whitespace-nowrap outline-none ${
+                    isActive ? 'text-accent-cyan font-bold' : 'text-dark-300 hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </motion.div>
             );
           })}
         </nav>

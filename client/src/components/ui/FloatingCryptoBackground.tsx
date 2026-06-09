@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Bitcoin, Activity, TrendingUp, DollarSign, Hexagon, BarChart2, Globe, Cpu } from 'lucide-react';
 
 export default function FloatingCryptoBackground() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
+  // Removed expensive React state mouse listener to ensure smooth 165Hz performance
+  
   const icons = [
     { Icon: Bitcoin, color: 'text-orange-500', size: 64, top: '15%', left: '10%', delay: 0, duration: 8 },
     { Icon: Hexagon, color: 'text-accent-purple', size: 80, top: '65%', left: '15%', delay: 1, duration: 10 },
@@ -30,56 +18,49 @@ export default function FloatingCryptoBackground() {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Background glowing abstract orbs */}
+      {/* Background glowing abstract orbs - optimized without parallax */}
+      <motion.div
+        animate={{ 
+          scale: [1, 1.1, 1], 
+          opacity: [0.15, 0.2, 0.15]
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-[10%] left-[20%] w-[400px] h-[400px] bg-accent-cyan/30 rounded-full blur-[100px] mix-blend-screen will-change-transform"
+      />
       <motion.div
         animate={{ 
           scale: [1, 1.2, 1], 
-          opacity: [0.15, 0.25, 0.15],
-          x: mousePosition.x * -2,
-          y: mousePosition.y * -2
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-[10%] left-[20%] w-[400px] h-[400px] bg-accent-cyan/30 rounded-full blur-[100px] mix-blend-screen"
-      />
-      <motion.div
-        animate={{ 
-          scale: [1, 1.5, 1], 
-          opacity: [0.15, 0.3, 0.15],
-          x: mousePosition.x * 2,
-          y: mousePosition.y * 2
+          opacity: [0.15, 0.25, 0.15]
         }}
         transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-accent-purple/30 rounded-full blur-[120px] mix-blend-screen"
+        className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-accent-purple/30 rounded-full blur-[120px] mix-blend-screen will-change-transform"
       />
       <motion.div
         animate={{ 
-          scale: [1, 1.3, 1], 
-          opacity: [0.1, 0.2, 0.1],
-          x: mousePosition.x * 1.5,
-          y: mousePosition.y * 1.5
+          scale: [1, 1.1, 1], 
+          opacity: [0.1, 0.15, 0.1]
         }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
-        className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-[150px] mix-blend-screen"
+        className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-[150px] mix-blend-screen will-change-transform"
       />
 
-      {/* Floating Crypto Icons */}
+      {/* Floating Crypto Icons - optimized without heavy filters */}
       {icons.map((item, i) => (
         <motion.div
           key={i}
           initial={{ opacity: 0, y: 100 }}
           animate={{ 
             opacity: 0.15, 
-            y: [0, -40, 0],
-            rotate: [0, 10, -10, 0],
-            x: mousePosition.x * ((i % 3) + 1), // Parallax effect
+            y: [0, -30, 0],
+            rotate: [0, 5, -5, 0]
           }}
           transition={{
             opacity: { duration: 2, delay: item.delay },
             y: { duration: item.duration, repeat: Infinity, ease: 'easeInOut', delay: item.delay },
             rotate: { duration: item.duration * 1.5, repeat: Infinity, ease: 'easeInOut', delay: item.delay },
           }}
-          className={`absolute ${item.color} drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]`}
-          style={{ top: item.top, left: item.left, filter: 'blur(1.5px)' }}
+          className={`absolute ${item.color} will-change-transform`}
+          style={{ top: item.top, left: item.left }}
         >
           <item.Icon size={item.size} strokeWidth={1.5} />
         </motion.div>

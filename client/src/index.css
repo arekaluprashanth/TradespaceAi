@@ -62,14 +62,6 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Force GPU rendering for smoother 144hz animations */
-  a, button, input, .glass, .glass-card, .glass-card-hover, img, svg {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-    will-change: transform, opacity;
-  }
-
   /* Remove default autofill styles */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,

@@ -25,18 +25,14 @@ export default function GlobalTooltip() {
         if (info && info.length > 0) {
           currentTarget = interactiveEl;
           
-          // Subtle highlight matching the dashboard sidebars
-          interactiveEl.style.boxShadow = 'inset 0 0 0 1px rgba(0,240,255,0.3), 0 4px 20px rgba(0,240,255,0.1)';
-          interactiveEl.style.transform = 'translateY(-1px)';
-          interactiveEl.style.transition = 'all 0.2s ease-out';
           interactiveEl.style.zIndex = '50';
           
-          // Show tooltip
+          // Show tooltip above the element
           const rect = interactiveEl.getBoundingClientRect();
           setTooltip({
             text: info,
             x: rect.left + rect.width / 2,
-            y: rect.bottom + 10,
+            y: rect.top - 10,
           });
 
           // Remove native title to prevent default browser tooltip overlapping
@@ -50,9 +46,7 @@ export default function GlobalTooltip() {
 
     const handleMouseOut = (e: MouseEvent) => {
       if (currentTarget) {
-        // Remove highlight
-        currentTarget.style.transform = '';
-        currentTarget.style.boxShadow = '';
+        // Remove z-index override
         currentTarget.style.zIndex = '';
         
         // Restore native title
@@ -73,8 +67,7 @@ export default function GlobalTooltip() {
       document.removeEventListener('mouseover', handleMouseOver, true);
       document.removeEventListener('mouseout', handleMouseOut, true);
       if (currentTarget) {
-        currentTarget.style.transform = '';
-        currentTarget.style.boxShadow = '';
+        currentTarget.style.zIndex = '';
       }
     };
   }, []);
@@ -91,7 +84,7 @@ export default function GlobalTooltip() {
             position: 'fixed',
             left: tooltip.x,
             top: tooltip.y,
-            transform: 'translateX(-50%)',
+            transform: 'translate(-50%, -100%)',
             zIndex: 99999,
           }}
           className="pointer-events-none px-3 py-1.5 bg-dark-900 text-white text-xs font-semibold rounded-lg border border-accent-cyan shadow-glow-cyan whitespace-nowrap"

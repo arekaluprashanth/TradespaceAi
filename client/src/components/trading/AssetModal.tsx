@@ -19,7 +19,7 @@ export default function AssetModal({ isOpen, onClose, asset }: AssetModalProps) 
   const [orderType, setOrderType] = useState<'buy' | 'sell'>('buy');
   const [quantity, setQuantity] = useState('1');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { executeTrade } = usePortfolioStore();
+  const { executeTrade } = usePortfolio();
 
   if (!isOpen || !asset) return null;
 

@@ -56,7 +56,20 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
       <div className="flex items-center justify-between h-16 px-4 lg:px-8 max-w-7xl mx-auto w-full gap-4 lg:gap-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group shrink-0">
-          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Logo" className="w-8 h-8" onError={(e) => { e.currentTarget.style.display='none' }} />
+          <motion.img 
+            src={`${import.meta.env.BASE_URL}logo.png`} 
+            alt="Logo" 
+            className="w-8 h-8" 
+            onError={(e) => { e.currentTarget.style.display='none' }}
+            animate={{ 
+              rotateY: [0, 360],
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity, 
+              ease: "linear" 
+            }}
+          />
           <span className="text-lg font-bold text-white hidden sm:block tracking-tight">TradeOxx Ai</span>
         </Link>
 

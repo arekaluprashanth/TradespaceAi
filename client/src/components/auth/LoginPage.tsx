@@ -76,7 +76,13 @@ const LoginPage: React.FC = () => {
       <div className="relative z-10">
         <nav className="container mx-auto px-6 py-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Logo" className="w-8 h-8" />
+            <motion.img 
+              src={`${import.meta.env.BASE_URL}logo.png`} 
+              alt="Logo" 
+              className="w-8 h-8" 
+              animate={{ rotateY: [0, 360] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            />
             <span className="text-xl font-bold text-gradient">TradeOxx Ai</span>
           </div>
           <div className="flex items-center gap-4">

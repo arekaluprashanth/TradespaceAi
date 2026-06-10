@@ -184,12 +184,6 @@ const LoginPage: React.FC = () => {
                   <Button type="submit" fullWidth size="lg" loading={isLoading} icon={<LogIn className="w-4 h-4" />}>
                     Sign In
                   </Button>
-                  
-                  <div className="text-center pt-2">
-                    <p className="text-xs text-dark-400">
-                      Demo Account: <span className="text-white font-mono">demo@example.com</span> / <span className="text-white font-mono">password</span>
-                    </p>
-                  </div>
                 </form>
 
                 <p className="mt-6 text-center text-xs text-dark-400">
